@@ -43,3 +43,4 @@ if st.button('TOP5에 들 수 있을까?'):              # 사용자가 '합불�
 
         else:
               st.error('당신의 팀은 포스트시즌에 진출하지 못할 것 입니다!')
+              st.snow()
