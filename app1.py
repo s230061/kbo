@@ -32,7 +32,7 @@ with col2:
 # 사용자의 입력을 받아서 a에 저장하기(초기값은 0)
 a = st.number_input('상위 40위 야구선수 연봉 총합을 입력하세요 (단위 1억)', value=0)  
 
-if st.button('합불분류'):              # 사용자가 '합불분류' 버튼을 누르면
+if st.button('TOP5에 들 수 있을까?'):              # 사용자가 '합불분류' 버튼을 누르면
         input_data = [[ a ]]          # 사용자가 입력한 a,b,c 를 input_data에 저장하고
         p = model.predict(input_data)      # model이 분류한 값을 p에 저장한다
         if p[0] == 1 :
