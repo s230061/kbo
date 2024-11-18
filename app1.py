@@ -1,34 +1,41 @@
 # streamlit 라이브러리 불러오기
 import streamlit as st      
 
+
+#model loading
+import joblib
+model = joblib.load('linear_regression_model.pkl') 
+
 # 제목 쓰기
-st.title('동생아 수학 공부하자!')  
+st.title('연봉 상위 40위 선수와 포스트 시즌의 관계')  
 # 부제목 쓰기
-st.subheader('오늘의 주제: 양수와 음수')
+st.subheader('고액 연봉 선수가 야구에 미치는 영향은?')
 # 본문 쓰기
-st.write('음수?? 어렵지 않아!') 
+
 
 # 여러 개의 열(문단)을 생성
 col1, col2 = st.columns(2)       
 # 왼쪽 문단
 with col1:
-      st.subheader('**개념정리')
-      st.write('- 양수: 0보다 큰 수')
-      st.write('- 음수: 0보다 작은 수')
-      st.write('- 양수: (+) / 음수: (-) 부호가 붙음')
-      st.write('- 부호: (+)는 생략 가능 /(-)는 생략 불가')
+      st.image('yug.jpg')  # 시각화1
+      st.write('실제 선수단의 결과는 연봉 외에도 선수의 기량, 팀 전략, 코칭 스태프, 심리적 요소 들을 포함해야 정확합니다.')
 #오른쪽 문단
 with col2:
-      st.image('수학이미지.PNG')  # 이미지 파일 불러오기
+      st.image('yug.jpg')  # 시각화2
+      
+      st.image('yug.jpg')  # 양의지
+      st.write('형은 4+2년 152억을 받고 포스트시즌에 안나왔어')
+      
+
+
 
 # 사용자의 입력을 받아서 a에 저장하기(초기값은 0)
-a = st.number_input('수를 입력하세요', value= 0)  
+a = st.number_input('상위 40위 야구선수 연봉 총합을 입력하세요 (단위 1000억)', value=0)  
 
-# 버튼 생성 및 동작
-if st.button('양수일까 음수일까?'):
-       if a > 0:
-              st.write('양수입니다')
-       elif a < 0:
-              st.write('음수입니다')
-       else:
-              st.write('0임 ㅋㅋ')
+if st.button('합불분류'):              # 사용자가 '합불분류' 버튼을 누르면
+        input_data = [[ a ]]          # 사용자가 입력한 a,b,c 를 input_data에 저장하고
+        p = model.predict(input_data)      # model이 분류한 값을 p에 저장한다
+        if p[0] == 1 :
+              st.success('당신의 팀은 포스트시즌에 진출할 것 입니다!')
+        else:
+              st.success('당신의 팀은 포스트시즌에 진출하지 못할 것 입니다!')
